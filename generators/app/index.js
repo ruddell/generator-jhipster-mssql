@@ -64,7 +64,6 @@ module.exports = yeoman.generators.Base.extend({
     this.log('angularAppName=' + this.angularAppName);
     this.log('message=' + this.message);
 
-    this.template('dummy.txt', 'dummy.txt', this, {});
 
     done();
   },
