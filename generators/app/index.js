@@ -32,12 +32,26 @@ module.exports = yeoman.generators.Base.extend({
   prompting: function () {
     var done = this.async();
 
-    var prompts = [{
-      type: 'input',
-      name: 'message',
-      message: 'Please put something',
-      default: 'hello world!'
-    }];
+    var prompts = [
+      {
+        type: 'input',
+        name: 'message',
+        message: 'Enable MS-SQL support in your JHipster app? (Y/n)',
+        default: 'Y'
+      },
+      {
+        type: 'input',
+        name: 'dev',
+        message: 'Enable for Dev? (Y/n)',
+        default: 'Y'
+      },
+      {
+        type: 'input',
+        name: 'prod',
+        message: 'Enable for Prod? (Y/n)',
+        default: 'Y'
+      }
+    ];
 
     this.prompt(prompts, function (props) {
       this.props = props;
@@ -56,8 +70,9 @@ module.exports = yeoman.generators.Base.extend({
     var javaDir = jhipsterVar.javaDir;
     var resourceDir = jhipsterVar.resourceDir;
     var webappDir = jhipsterVar.webappDir;
-
-    this.message = this.props.message;
+    this.message = this.props.message.toUpperCase();
+    this.prod = this.props.prod.toUpperCase();
+    this.dev = this.props.dev.toUpperCase();
 
     this.log('baseName=' + this.baseName);
     this.log('packageName=' + this.packageName);
