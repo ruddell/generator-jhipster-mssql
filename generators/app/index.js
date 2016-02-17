@@ -79,13 +79,18 @@ module.exports = yeoman.generators.Base.extend({
     this.log('angularAppName=' + this.angularAppName);
     this.log('message=' + this.message);
 
+    if(this.message == 'Y' && (this.dev || this.prod)){
+    //    Check for MS SQL Server JDBC in pom and add it if missing
+      jhipsterFunc.addMavenDependency('com.microsoft.sqlserver','sqljdbc41','4.1');
+      jhipsterFunc.addMavenDependency('com.github.sabomichal','liquibase-mssql','1.4');
+
+    }
 
     done();
   },
 
   install: function () {
     var done = this.async();
-    this.installDependencies();
     done();
   },
 
