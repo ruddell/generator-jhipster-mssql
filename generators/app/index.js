@@ -90,5 +90,9 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   end: function () {
+    this.log('You will need to install the sqljdbc41.jar locally.');
+    this.log('Download link:\nhttps://www.microsoft.com/en-us/download/details.aspx?id=11774');
+    this.log('Command to install:\nmvn install:install-file -Dfile=path/to/sqljdbc41.jar -DgroupId=com.microsoft.sqlserver -DartifactId=sqljdbc41 -Dversion=4.1 -Dpackaging=jar');
+    this.log('If you use a corporate mvn repository, you need to install the sqljdbc41.jar onto that repository');
   }
 });
