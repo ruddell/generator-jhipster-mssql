@@ -109,7 +109,7 @@ module.exports = yeoman.generators.Base.extend({
     this.applicationDatasource = 'datasource:' +
                                '\n        driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDataSource' +
                                '\n        url: jdbc:sqlserver://' +
-                               '\n        username: user@domain' +
+                               '\n        username: ' +
                                '\n        password: ' +
                                '\n    jpa:' +
                                '\n        database-platform: org.hibernate.dialect.SQLServerDialect' +
@@ -131,13 +131,14 @@ module.exports = yeoman.generators.Base.extend({
 
       }
 
-    //  Add ext to databaseChangeLog XML schema in 00000000000000_initial_schema.xml
+      //  Add ext to databaseChangeLog XML schema in 00000000000000_initial_schema.xml
       jhipsterFunc.replaceContent(this.resourceDir + 'config/liquibase/changelog/00000000000000_initial_schema.xml', '<databaseChangeLog[\\s\\S]*3.4.xsd">', this.changelogHeader, true);
 
       //  Add settings for MSSQL Dates and Autoincrement
       jhipsterFunc.replaceContent(this.resourceDir + 'config/liquibase/changelog/00000000000000_initial_schema.xml', '<property name="now" value="current_timestamp" dbms="postgresql"/>', '<property name="now" value="current_timestamp" dbms="postgresql"/>\n    <property name="now" value="GETDATE()" dbms="mssql"/>');
       jhipsterFunc.replaceContent(this.resourceDir + 'config/liquibase/changelog/00000000000000_initial_schema.xml', '<property name="autoIncrement" value="true" dbms="mysql,h2,postgresql,oracle"/>', '<property name="autoIncrement" value="true" dbms="mssql,mysql,h2,postgresql,oracle"/>');
 
+      //  Add ext prefix and identityInsertEnabled="true" attribute to loadData
       jhipsterFunc.replaceContent(this.resourceDir + 'config/liquibase/changelog/00000000000000_initial_schema.xml', '<loadData[\\s\\S]*authority"/>', this.changelogLoadData, true);
     }
 
