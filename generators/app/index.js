@@ -85,7 +85,7 @@ module.exports = yeoman.generators.Base.extend({
                     '\n                  file="config/liquibase/users.csv"' +
                     '\n                  separator=";"' +
                     '\n                  tableName="jhi_user"' +
-                    '\n                  identityInsertEnabled="true" />'+
+                    '\n                  identityInsertEnabled="true">'+
                     '\n            <column name="activated" type="boolean"/>' +
                     '\n            <column name="created_date" type="timestamp"/>' +
                     '\n        </ext:loadData>' +
