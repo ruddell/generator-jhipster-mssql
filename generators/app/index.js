@@ -117,9 +117,9 @@ module.exports = yeoman.generators.Base.extend({
                                '\n        show_sql:';
 
     if(this.message == 'Y' && (this.dev || this.prod)){
-    //    Check for MS SQL Server JDBC in pom and add it if missing
-      jhipsterFunc.addMavenDependency('com.microsoft.sqlserver','sqljdbc41','4.1');
-      jhipsterFunc.addMavenDependency('com.github.sabomichal','liquibase-mssql','1.4');
+      //    Check for MS SQL Server JDBC in pom and add it if missing
+      jhipsterFunc.addMavenDependency('com.microsoft.sqlserver','sqljdbc42','4.2');
+      jhipsterFunc.addMavenDependency('com.github.sabomichal','liquibase-mssql','1.5');
 
       //  Alter application-dev and application-prod
       if(this.dev == 'Y') {
@@ -151,9 +151,10 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   end: function () {
-    this.log('You will need to install the sqljdbc41.jar locally.');
+    this.log('You will need to install the sqljdbc42.jar locally.');
     this.log('Download link:\nhttps://www.microsoft.com/en-us/download/details.aspx?id=11774');
-    this.log('Command to install:\nmvn install:install-file -Dfile=path/to/sqljdbc41.jar -DgroupId=com.microsoft.sqlserver -DartifactId=sqljdbc41 -Dversion=4.1 -Dpackaging=jar');
-    this.log('If you use a corporate mvn repository, you need to install the sqljdbc41.jar onto that repository');
+    this.log('Command to install:\nmvn install:install-file -Dfile=path/to/sqljdbc42.jar -DgroupId=com.microsoft.sqlserver -DartifactId=sqljdbc42 -Dversion=4.2 -Dpackaging=jar');
+    this.log('If you use a corporate mvn repository, you need to install the sqljdbc42.jar onto that repository');
+    this.log('Copy your Connection String from the Azure Portal or set it up manually in application-dev.yml and application-prod.yml');
   }
 });
