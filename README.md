@@ -48,7 +48,7 @@ mvn install:install-file -Dfile=path/to/sqljdbc42.jar -DgroupId=com.microsoft.sq
 
 This is an initial release so there will be untested situations.  This was tested with an Azure-hosted MSSQL database and initial database settings of MySQL. 
 
-You will need to manually add date and autoincrement properties to Liquibase changelogs for any generated entities (copy from the initial changeloy).  This will change in the next version.
+You will need to manually add date and autoincrement properties to Liquibase changelogs for any generated entities (copy from the initial changelog).  This will change in the next version.
 
 # License
 
