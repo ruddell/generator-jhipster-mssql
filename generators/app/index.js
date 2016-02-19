@@ -103,10 +103,30 @@ module.exports = yeoman.generators.Base.extend({
                     '\n                  tableName="jhi_user_authority"' +
                     '\n                  identityInsertEnabled="true" />';
 
+    this.applicationDatasource = 'datasource:' +
+                               '\n        driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDataSource' +
+                               '\n        url: jdbc:sqlserver://' +
+                               '\n        username: user@domain' +
+                               '\n        password: ' +
+                               '\n    jpa:' +
+                               '\n        database-platform: org.hibernate.dialect.SQLServerDialect' +
+                               '\n        database: SQL_SERVER' +
+                               '\n        show_sql:';
+
     if(this.message == 'Y' && (this.dev || this.prod)){
     //    Check for MS SQL Server JDBC in pom and add it if missing
       jhipsterFunc.addMavenDependency('com.microsoft.sqlserver','sqljdbc41','4.1');
       jhipsterFunc.addMavenDependency('com.github.sabomichal','liquibase-mssql','1.4');
+
+      //  Alter application-dev and application-prod
+      if(this.dev == 'Y') {
+        //  datasource[\s\S]*jpa
+        jhipsterFunc.replaceContent(this.resourceDir + 'config/application-dev.yml', 'datasource[\\s\\S]*show_sql:', this.applicationDatasource, true);
+      }
+      if(this.prod == 'Y') {
+        jhipsterFunc.replaceContent(this.resourceDir + 'config/application-prod.yml', 'datasource[\\s\\S]*show_sql:', this.applicationDatasource, true);
+
+      }
 
     //  Add ext to databaseChangeLog XML schema in 00000000000000_initial_schema.xml
       jhipsterFunc.replaceContent(this.resourceDir + 'config/liquibase/changelog/00000000000000_initial_schema.xml', '<databaseChangeLog[\\s\\S]*3.4.xsd">', this.changelogHeader, true);
