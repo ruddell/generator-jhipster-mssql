@@ -67,17 +67,12 @@ module.exports = yeoman.generators.Base.extend({
     this.baseName = jhipsterVar.baseName;
     this.packageName = jhipsterVar.packageName;
     this.angularAppName = jhipsterVar.angularAppName;
-    var javaDir = jhipsterVar.javaDir;
-    var resourceDir = jhipsterVar.resourceDir;
-    var webappDir = jhipsterVar.webappDir;
+    this.javaDir = jhipsterVar.javaDir;
+    this.resourceDir = jhipsterVar.resourceDir;
+    this.webappDir = jhipsterVar.webappDir;
     this.message = this.props.message.toUpperCase();
     this.prod = this.props.prod.toUpperCase();
     this.dev = this.props.dev.toUpperCase();
-
-    this.log('baseName=' + this.baseName);
-    this.log('packageName=' + this.packageName);
-    this.log('angularAppName=' + this.angularAppName);
-    this.log('message=' + this.message);
 
     if(this.message == 'Y' && (this.dev || this.prod)){
     //    Check for MS SQL Server JDBC in pom and add it if missing
@@ -95,6 +90,5 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   end: function () {
-    this.log('End');
   }
 });
