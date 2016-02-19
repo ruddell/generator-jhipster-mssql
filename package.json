@@ -4,14 +4,16 @@
     "description": "JHipster module for adding MS-SQL capabilities to a generated app.",
     "keywords": [
         "yeoman-generator",
-        "jhipster-module"
+        "jhipster-module",
+        "mssql",
+        "jhipster"
     ],
     "homepage": "https://github.com/ruddell/generator-jhipster-mssql",
     "bugs": "https://github.com/ruddell/generator-jhipster-mssql/issues",
     "author": {
         "name": "Jonathan Ruddell",
-        "email": "",
-        "url": ""
+        "email": "jonathan.ruddell@gmail.com",
+        "url": "https://jruddell.com"
     },
     "files": [
         "generators"
