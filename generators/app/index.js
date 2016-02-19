@@ -74,11 +74,45 @@ module.exports = yeoman.generators.Base.extend({
     this.prod = this.props.prod.toUpperCase();
     this.dev = this.props.dev.toUpperCase();
 
+    this.changelogHeader = '<databaseChangeLog' +
+                            '\n    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"' +
+                            '\n    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"' +
+                            '\n    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"' +
+                            '\n    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd' +
+                            '\n    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">';
+
+    this.changelogLoadData = '<ext:loadData encoding="UTF-8"' +
+                    '\n                  file="config/liquibase/users.csv"' +
+                    '\n                  separator=";"' +
+                    '\n                  tableName="jhi_user"' +
+                    '\n                  identityInsertEnabled="true" />'+
+                    '\n            <column name="activated" type="boolean"/>' +
+                    '\n            <column name="created_date" type="timestamp"/>' +
+                    '\n        </ext:loadData>' +
+                    '\n        <dropDefaultValue tableName="jhi_user" columnName="created_date" columnDataType="datetime"/>' +
+                    '\n' +
+                    '\n        <ext:loadData encoding="UTF-8"' +
+                    '\n                  file="config/liquibase/authorities.csv"' +
+                    '\n                  separator=";"' +
+                    '\n                  tableName="jhi_authority"' +
+                    '\n                  identityInsertEnabled="true" />'+
+                    '\n' +
+                    '\n        <ext:loadData encoding="UTF-8"' +
+                    '\n                  file="config/liquibase/users_authorities.csv"' +
+                    '\n                  separator=";"' +
+                    '\n                  tableName="jhi_user_authority"' +
+                    '\n                  identityInsertEnabled="true" />';
+
     if(this.message == 'Y' && (this.dev || this.prod)){
     //    Check for MS SQL Server JDBC in pom and add it if missing
       jhipsterFunc.addMavenDependency('com.microsoft.sqlserver','sqljdbc41','4.1');
       jhipsterFunc.addMavenDependency('com.github.sabomichal','liquibase-mssql','1.4');
 
+    //  Add ext to databaseChangeLog XML schema in 00000000000000_initial_schema.xml
+      jhipsterFunc.replaceContent(this.resourceDir + 'config/liquibase/changelog/00000000000000_initial_schema.xml', '<databaseChangeLog[\\s\\S]*3.4.xsd">', this.changelogHeader, true);
+
+    //  Add ext prefix and identityInsertEnabled="true" attribute to loadData
+      jhipsterFunc.replaceContent(this.resourceDir + 'config/liquibase/changelog/00000000000000_initial_schema.xml', '<loadData[\\s\\S]*authority"/>', this.changelogLoadData, true);
     }
 
     done();
