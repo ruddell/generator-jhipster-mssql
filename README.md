@@ -12,7 +12,7 @@ As this is a [JHipster](http://jhipster.github.io/) module, we expect you have J
 
 - [Installing JHipster](https://jhipster.github.io/installation.html)
 
-##### This modules requires JHipster >= v2.27.0
+##### This modules requires JHipster >= v3.0.0.  If you want to use a lower version, please use v1.0.1 of this module.
 
 # Installation
 
@@ -46,7 +46,7 @@ mvn install:install-file -Dfile=path/to/sqljdbc42.jar -DgroupId=com.microsoft.sq
 
 # Notes
 
-This is an initial release so there will be untested situations.  This was tested with an Azure-hosted MSSQL database and initial database settings of MySQL. 
+This was tested with an Azure-hosted MSSQL database and initial JHipster database settings of MySQL. 
 
 You will need to manually add date and autoincrement properties to Liquibase changelogs for any generated entities (copy from the initial changelog).  This will change in the next version.
 

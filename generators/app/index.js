@@ -107,7 +107,6 @@ module.exports = yeoman.generators.Base.extend({
     this.changelogAutoIncrementSettings = '<property name="autoIncrement" value="true" dbms="mssql, mysql,h2,postgresql,oracle"/>';
 
     this.applicationDatasource = 'datasource:' +
-                               '\n        driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDataSource' +
                                '\n        url: jdbc:sqlserver://' +
                                '\n        username: ' +
                                '\n        password: ' +
