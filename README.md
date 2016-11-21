@@ -36,13 +36,10 @@ yo jhipster-mssql
 ```
 ### Follow These Steps
 1. Add your MSSQL Database Credentials in the application-dev.yml and application-prod.yml files.  Simply copying an Azure Connection String (JDBC) and setting your username/password will work.
-2. Add your IP and your production environment's IP to the Allowed IPs for the MSSQL Database.
-3. Install the MSSQL-JDBC Driver locally and on any mvn repositories your project builds off of (important for corporate environments).  
-  1. Download from: [https://www.microsoft.com/en-us/download/details.aspx?id=11774](https://www.microsoft.com/en-us/download/details.aspx?id=11774)
-  2. Run to install locally:
-```bash
-mvn install:install-file -Dfile=path/to/sqljdbc42.jar -DgroupId=com.microsoft.sqlserver -DartifactId=sqljdbc42 -Dversion=4.2 -Dpackaging=jar
-```
+2. Make sure your IP and your production environment's IP are in the Allowed IPs for the MSSQL Database.
+
+A docker-compose configuration is generated for you in `src/main/docker`.  Run `docker-compose -f src/main/docker/mssql.yml up -d` in order to launch a local SQL Server.  Running this image requires docker
+to have more than 3.25GB of RAM.
 
 # Notes
 
