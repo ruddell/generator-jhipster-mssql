@@ -1,0 +1,13 @@
+version: '2'
+services:
+    jhitest-mssql:
+        container_name: <%= baseName %>-mssql
+        image: microsoft/mssql-server-linux:latest # replace 'latest' with version once tagged
+        # volumes are not supported on macOS
+        # volumes:
+        #     - ~/volumes/jhipster/jhitest/mssql/:/var/opt/mssql/data/
+        environment:
+            - ACCEPT_EULA=Y
+            - SA_PASSWORD=yourStrong(!)Password
+        ports:
+            - 1433:1433

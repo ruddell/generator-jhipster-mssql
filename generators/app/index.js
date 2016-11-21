@@ -107,9 +107,9 @@ module.exports = yeoman.generators.Base.extend({
     this.changelogAutoIncrementSettings = '<property name="autoIncrement" value="true" dbms="mssql, mysql,h2,postgresql,oracle"/>';
 
     this.applicationDatasource = 'datasource:' +
-                               '\n        url: jdbc:sqlserver://' +
-                               '\n        username: ' +
-                               '\n        password: ' +
+                               '\n        url: jdbc:sqlserver://localhost:1433;database=' + this.baseName +
+                               '\n        username: SA' +
+                               '\n        password: yourStrong(!)Password' +
                                '\n    jpa:' +
                                '\n        database-platform: org.hibernate.dialect.SQLServerDialect' +
                                '\n        database: SQL_SERVER' +
@@ -117,7 +117,7 @@ module.exports = yeoman.generators.Base.extend({
 
     if(this.message == 'Y' && (this.dev || this.prod)){
       //    Check for MS SQL Server JDBC in pom and add it if missing
-      jhipsterFunc.addMavenDependency('com.microsoft.sqlserver','sqljdbc42','4.2');
+      jhipsterFunc.addMavenDependency('com.microsoft.sqlserver','mssql-jdbc','6.1.0.jre8');
       jhipsterFunc.addMavenDependency('com.github.sabomichal','liquibase-mssql','1.5');
 
       //  Alter application-dev and application-prod
@@ -139,6 +139,9 @@ module.exports = yeoman.generators.Base.extend({
 
       //  Add ext prefix and identityInsertEnabled="true" attribute to loadData
       jhipsterFunc.replaceContent(this.resourceDir + 'config/liquibase/changelog/00000000000000_initial_schema.xml', '<loadData[\\s\\S]*authority"/>', this.changelogLoadData, true);
+
+      // Add the SQL Server docker file
+      this.template('mssql.yml', 'src/main/docker/mssql.yml', this, {});
     }
 
     done();
@@ -150,10 +153,6 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   end: function () {
-    this.log('You will need to install the sqljdbc42.jar locally.');
-    this.log('Download link:\nhttps://www.microsoft.com/en-us/download/details.aspx?id=11774');
-    this.log('Command to install:\nmvn install:install-file -Dfile=path/to/sqljdbc42.jar -DgroupId=com.microsoft.sqlserver -DartifactId=sqljdbc42 -Dversion=4.2 -Dpackaging=jar');
-    this.log('If you use a corporate mvn repository, you need to install the sqljdbc42.jar onto that repository');
-    this.log('Copy your Connection String from the Azure Portal or set it up manually in application-dev.yml and application-prod.yml');
+    this.log('Make sure to set up your connection credentials in application-dev.yml and application-prod.yml');
   }
 });
