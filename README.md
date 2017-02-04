@@ -2,6 +2,11 @@
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 > JHipster module for adding Microsoft SQL capabilities to a generated application.
 
+# PLEASE NOTE
+
+As of JHipster v3.12.1, MSSQL is an official choice in the generator!  Please use this module only if you are building 
+a project with an older version (<= v3.12.0).
+
 # Introduction
 
 This is a [JHipster](http://jhipster.github.io/) module, that is meant to be used in a JHipster application.
